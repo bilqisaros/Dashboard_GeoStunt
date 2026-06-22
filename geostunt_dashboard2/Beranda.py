@@ -68,7 +68,9 @@ with col1:
     render_kpi_card(
         "Rata-Rata Stunting Nasional",
         f"{format_number(df['stunting'].mean())}%",
-        note=f"Rentang {format_number(df['stunting'].min())}% - {format_number(df['stunting'].max())}% antar kabupaten/kota",
+        delta=f"Rentang {format_number(df['stunting'].min())}% – {format_number(df['stunting'].max())}%",
+        delta_positive=True,
+        note="Variasi prevalensi antar kabupaten/kota",
         accent="terracotta",
     )
 
