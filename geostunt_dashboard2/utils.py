@@ -58,16 +58,15 @@ def load_master_data():
     return pd.read_csv(DATA_DIR / "master_data.csv")
 
 @st.cache_data
-def load_metrics():
-    with open(DATA_DIR / "metrics_summary.json", encoding="utf-8") as f:
-        return json.load(f)
-
+def load_geo_data():
+    gdf = gpd.read_file(DATA_DIR / "kabupaten_full.geojson")
+    gdf["faktor_dominan"] = gdf["faktor_dominan"].fillna("Tidak ada data")
+    return gdf
 
 @st.cache_data
 def load_metrics():
-    with open(f"{DATA_DIR}/metrics_summary.json") as f:
+    with open(DATA_DIR / "metrics_summary.json", encoding="utf-8") as f:
         return json.load(f)
-
 
 @st.cache_data
 def load_local_importance():
