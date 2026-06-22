@@ -65,14 +65,11 @@ render_section_header(
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    moran_ols = metrics["uji_asumsi"]["moran_ols_I"]
     render_kpi_card(
-        "Autokorelasi Spasial Residual OLS",
-        f"{moran_ols:.3f}",
-        delta="Signifikan (p < 0.01)",
-        delta_positive=False,
-        note="Model global gagal menangkap variasi antarwilayah",
-        accent="slate",
+        "Rata-Rata Stunting Nasional",
+        f"{format_number(df['stunting'].mean())}%",
+        note=f"Rentang {format_number(df['stunting'].min())}% - {format_number(df['stunting'].max())}% antar kabupaten/kota",
+        accent="terracotta",
     )
 
 with col2:
