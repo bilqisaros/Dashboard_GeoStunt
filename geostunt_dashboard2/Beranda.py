@@ -116,7 +116,7 @@ st.markdown("")
 # ---------------------------------------------------------------- INSIGHT UTAMA
 render_insight(
     "<strong>Temuan utama:</strong> Faktor dominan penyebab stunting berbeda-beda "
-    "antar wilayah. RLS (pendidikan ibu) dominan di sebagian besar wilayah Jawa dan "
+    "antar wilayah. RLS (rata-rata lama sekolah) dominan di sebagian besar wilayah Jawa dan "
     "Sumatra, kemiskinan dominan di wilayah Indonesia timur, sementara konsumsi pangan "
     "hewani dominan di sebagian Nusa Tenggara dan Sulawesi. Hal ini menunjukkan bahwa "
     "program intervensi yang seragam secara nasional berisiko tidak optimal karena "
