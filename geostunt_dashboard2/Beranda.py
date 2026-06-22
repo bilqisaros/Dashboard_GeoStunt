@@ -65,11 +65,14 @@ render_section_header(
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
+    moran_ols = metrics["uji_asumsi"]["moran_ols_I"]
     render_kpi_card(
-        "Rata-Rata Stunting Nasional",
-        "17.5%",
-        note="TESTING NOTE",
-        accent="terracotta",
+        "Autokorelasi Spasial Residual OLS",
+        f"{moran_ols:.3f}",
+        delta="Signifikan (p < 0.01)",
+        delta_positive=False,
+        note="Model global gagal menangkap variasi antarwilayah",
+        accent="slate",
     )
 
 with col2:
