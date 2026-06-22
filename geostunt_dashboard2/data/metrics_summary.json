@@ -1,0 +1,62 @@
+{
+  "uji_asumsi": {
+    "vif_max": 1.86,
+    "vif_keterangan": "Tidak ada multikolinearitas",
+    "shapiro_p": 0.6669,
+    "normalitas": "Normal",
+    "breusch_pagan_p": 0.0104,
+    "heteroskedastisitas": "Heteroskedastis",
+    "moran_ols_I": 0.3636,
+    "moran_ols_p": 0.001,
+    "moran_ols_z": 12.6786,
+    "autokorelasi_spasial": "Ada (signifikan)"
+  },
+  "model_performance": {
+    "OLS": {
+      "R2": 0.1461,
+      "MAE": 4.1258,
+      "RMSE": 5.2131
+    },
+    "Random Forest": {
+      "R2": 0.1819,
+      "MAE": 4.0967,
+      "RMSE": 5.1026
+    },
+    "GRF": {
+      "R2": 0.2032,
+      "MAE": 4.059,
+      "RMSE": 5.0358
+    }
+  },
+  "moran_residual": {
+    "OLS": {
+      "I": 0.3636,
+      "p": 0.001
+    },
+    "GRF": {
+      "I": 0.2162,
+      "p": 0.001
+    }
+  },
+  "grf_params": {
+    "bandwidth": 79,
+    "local_weight": 0.1859,
+    "n_estimators": 500,
+    "n_folds": 10,
+    "n_obs": 404
+  },
+  "feature_importance_global_rf": {
+    "Kemiskinan": 0.242607,
+    "Pangan Hewani": 0.220442,
+    "RLS": 0.191376,
+    "Konsumsi Protein": 0.182656,
+    "Melahirkan Tidak di Faskes": 0.162919
+  },
+  "faktor_dominan_distribusi": {
+    "RLS": 195,
+    "Kemiskinan": 120,
+    "Pangan Hewani": 79,
+    "Konsumsi Protein": 6,
+    "Melahirkan Tidak di Faskes": 4
+  }
+}
