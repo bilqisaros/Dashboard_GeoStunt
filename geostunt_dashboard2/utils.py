@@ -8,8 +8,10 @@ import json
 import streamlit as st
 import pandas as pd
 import geopandas as gpd
+from pathlib import Path
 
-DATA_DIR = "data"
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
 
 VAR_COLS = [
     "melahirkan_tidak_difaskes",
@@ -53,15 +55,12 @@ MODEL_COLORS = {
 
 @st.cache_data
 def load_master_data():
-    df = pd.read_csv(f"{DATA_DIR}/master_data.csv")
-    return df
-
+    return pd.read_csv(DATA_DIR / "master_data.csv")
 
 @st.cache_data
-def load_geo_data():
-    gdf = gpd.read_file(f"{DATA_DIR}/kabupaten_full.geojson")
-    gdf["faktor_dominan"] = gdf["faktor_dominan"].fillna("Tidak ada data")
-    return gdf
+def load_metrics():
+    with open(DATA_DIR / "metrics_summary.json", encoding="utf-8") as f:
+        return json.load(f)
 
 
 @st.cache_data
@@ -72,8 +71,7 @@ def load_metrics():
 
 @st.cache_data
 def load_local_importance():
-    df = pd.read_csv(f"{DATA_DIR}/dominan_df.csv")
-    return df
+    return pd.read_csv(DATA_DIR / "dominan_df.csv")
 
 
 def format_number(x, decimals=1):
@@ -81,8 +79,13 @@ def format_number(x, decimals=1):
 
 
 def inject_css():
-    with open("assets/style.css") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    css_path = BASE_DIR / "assets" / "style.css"
+
+    with open(css_path, encoding="utf-8") as f:
+        st.markdown(
+            f"<style>{f.read()}</style>",
+            unsafe_allow_html=True
+        )
 
 
 def render_hero(title, subtitle, badges):
