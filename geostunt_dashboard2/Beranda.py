@@ -67,8 +67,8 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     render_kpi_card(
         "Rata-Rata Stunting Nasional",
-        f"{format_number(df['stunting'].mean())}%",
-        note=f"Rentang {format_number(df['stunting'].min())}% - {format_number(df['stunting'].max())}% antar kabupaten/kota",
+        "17.5%",
+        note="TESTING NOTE",
         accent="terracotta",
     )
 
