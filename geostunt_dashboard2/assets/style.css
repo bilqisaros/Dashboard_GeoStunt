@@ -393,3 +393,7 @@ hr {
     color: #8A8F84;
 }
 
+.justify-text {
+    text-align: justify;
+    line-height: 1.8;
+}
