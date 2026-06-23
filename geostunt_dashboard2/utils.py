@@ -110,25 +110,23 @@ def render_section_header(eyebrow, title, desc=None):
 
 
 def render_kpi_card(label, value, note=None, delta=None, delta_positive=True, accent=None):
-
     delta_html = ""
     if delta:
         cls = "kpi-delta-up" if delta_positive else "kpi-delta-down"
         delta_html = f'<div class="{cls}">{delta}</div>'
-
+    note_html = f'<div class="kpi-note">{note}</div>' if note else ""
     accent_cls = f" accent-{accent}" if accent else ""
-
-    html = f"""
-    <div class="kpi-card{accent_cls}">
-        <div class="kpi-label">{label}</div>
-        <div class="kpi-value">{value}</div>
-        {delta_html}
-        <div class="kpi-note">{note}</div>
-    </div>
-    """
-
-    st.code(html)   # DEBUG
-    st.markdown(html, unsafe_allow_html=True)
+    st.markdown(
+        f"""
+        <div class="kpi-card{accent_cls}">
+            <div class="kpi-label">{label}</div>
+            <div class="kpi-value">{value}</div>
+            {delta_html}
+            {note_html}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_insight(text):
