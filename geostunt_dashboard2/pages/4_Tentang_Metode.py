@@ -24,7 +24,7 @@ st.markdown(
     Sebuah daerah bisa mengalami stunting tinggi karena kemiskinan, sementara daerah
     lain karena akses pangan hewani yang rendah, atau karena rendahnya tingkat
     pendidikan ibu. Model statistik konvensional biasanya mengasumsikan satu hubungan
-    yang sama berlaku di seluruh wilayah -- asumsi yang tidak realistis untuk negara
+    yang sama berlaku di seluruh wilayah tetapi asumsi yang tidak realistis untuk negara
     seluas dan sebervariasi Indonesia.
     </div>
     """,
@@ -57,7 +57,7 @@ render_insight(
     "<strong>Analogi sederhana:</strong> Bayangkan model regresi biasa seperti dokter "
     "umum yang memberi resep yang sama untuk semua pasien demam. GRF lebih seperti "
     "tim dokter yang masing-masing memeriksa pasien di kecamatannya sendiri, sehingga "
-    "diagnosisnya lebih sesuai dengan kondisi lokal -- meski tetap mengacu pada ilmu "
+    "diagnosisnya lebih sesuai dengan kondisi lokal, meski tetap mengacu pada ilmu "
     "kedokteran yang sama."
 )
 
@@ -92,17 +92,17 @@ render_section_header("Tahapan Analisis", "Dari data mentah hingga peta faktor d
 
 st.markdown(
     """
-    1. **Pembersihan data** -- Menggabungkan enam sumber data resmi pemerintah berdasarkan nama kabupaten/kota,
+    1. **Pembersihan data** : Menggabungkan enam sumber data resmi pemerintah berdasarkan nama kabupaten/kota,
        menyamakan format penulisan nama wilayah, dan menghapus baris dengan data tidak lengkap.
-    2. **Pencarian koordinat** -- Menghitung titik tengah (centroid) tiap wilayah dari batas administrasi
+    2. **Pencarian koordinat** : Menghitung titik tengah (centroid) tiap wilayah dari batas administrasi
        resmi untuk keperluan analisis spasial.
-    3. **Uji model dasar** -- Menjalankan regresi linear (OLS) sebagai pembanding, lalu menguji apakah
+    3. **Uji model dasar** : Menjalankan regresi linear (OLS) sebagai pembanding, lalu menguji apakah
        residualnya menunjukkan pola spasial yang tidak tertangkap.
-    4. **Pembanding Random Forest global** -- Menjalankan Random Forest tanpa komponen spasial sebagai
+    4. **Pembanding Random Forest global** : Menjalankan Random Forest tanpa komponen spasial sebagai
        tahap pembanding kedua.
-    5. **Pemodelan GRF** -- Menjalankan Geographical Random Forest dengan parameter bandwidth dan
+    5. **Pemodelan GRF** : Menjalankan Geographical Random Forest dengan parameter bandwidth dan
        pembobotan yang dioptimalkan secara otomatis, divalidasi dengan 10-fold cross validation.
-    6. **Ekstraksi faktor dominan** -- Mengambil nilai kontribusi (local feature importance) tiap
+    6. **Ekstraksi faktor dominan** : Mengambil nilai kontribusi (local feature importance) tiap
        variabel di setiap kabupaten/kota, lalu menentukan faktor dengan kontribusi tertinggi.
     """
 )
