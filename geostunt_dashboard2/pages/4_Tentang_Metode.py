@@ -17,19 +17,16 @@ render_section_header(
 )
 
 # ------------------------------------------------------------ KONSEP DASAR
-st.markdown(
-    """
-    <div class="section-desc">
-    Stunting bukan masalah dengan satu sebab tunggal yang sama di seluruh Indonesia.
-    Sebuah daerah bisa mengalami stunting tinggi karena kemiskinan, sementara daerah
-    lain karena akses pangan hewani yang rendah, atau karena rendahnya tingkat
-    pendidikan ibu. Model statistik konvensional biasanya mengasumsikan satu hubungan
-    yang sama berlaku di seluruh wilayah tetapi asumsi yang tidak realistis untuk negara
-    seluas dan sebervariasi Indonesia.
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+st.markdown("""
+<div class="justify-text">
+Stunting bukan masalah dengan satu sebab tunggal yang sama di seluruh Indonesia.
+Sebuah daerah bisa mengalami stunting tinggi karena kemiskinan, sementara daerah lain
+karena akses pangan hewani yang rendah, atau karena rendahnya tingkat pendidikan ibu.
+Model statistik konvensional biasanya mengasumsikan satu hubungan yang sama berlaku
+di seluruh wilayah tetapi asumsi yang tidak realistis untuk negara seluas dan
+sebervariasi Indonesia.
+</div>
+""", unsafe_allow_html=True)
 
 cols = st.columns(4)
 steps = [
