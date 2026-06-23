@@ -54,18 +54,16 @@ st.markdown("---")
 col_h1, col_h2 = st.columns([2, 1])
 with col_h1:
     st.markdown(
-        f"""
-        <div class="kpi-card" style="padding:1.4rem 1.5rem;">
-            <div class="kpi-label">{row['provinsi']}</div>
-            <div class="kpi-value" style="font-size:1.7rem;">{kab_pilihan}</div>
-            <div style="margin-top:0.7rem;">
-                <span class="legend-chip" style="font-size:0.85rem;">
-                    <span class="legend-dot" style="background:{color}"></span>
-                    Faktor dominan: {row['faktor_dominan']}
-                </span>
-            </div>
-        </div>
-        """,
+        f'<div class="kpi-card" style="padding:1.4rem 1.5rem;">'
+        f'<div class="kpi-label">{row["provinsi"]}</div>'
+        f'<div class="kpi-value" style="font-size:1.7rem;">{kab_pilihan}</div>'
+        f'<div style="margin-top:0.7rem;">'
+        f'<span class="legend-chip" style="font-size:0.85rem;">'
+        f'<span class="legend-dot" style="background:{color}"></span>'
+        f'Faktor dominan: {row["faktor_dominan"]}'
+        f'</span>'
+        f'</div>'
+        f'</div>',
         unsafe_allow_html=True,
     )
 
