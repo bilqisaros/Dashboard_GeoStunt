@@ -163,12 +163,10 @@ with col_a:
     for factor, count in dist.items():
         color = FACTOR_COLORS.get(factor, "#999")
         st.markdown(
-            f"""
-            <div class="legend-chip">
-                <span class="legend-dot" style="background:{color}"></span>
-                {factor} &mdash; {count} kab/kota
-            </div>
-            """,
+            f'<div class="legend-chip">'
+            f'<span class="legend-dot" style="background:{color}"></span>'
+            f'{factor} &mdash; {count} kab/kota'
+            f'</div>',
             unsafe_allow_html=True,
         )
 
@@ -188,21 +186,19 @@ with col_b:
         row = df[df["kab_kota"] == search].iloc[0]
         color = FACTOR_COLORS.get(row["faktor_dominan"], "#999")
         st.markdown(
-            f"""
-            <div class="kpi-card">
-                <div class="kpi-label">{row['provinsi']}</div>
-                <div class="kpi-value" style="font-size:1.3rem;">{search}</div>
-                <div style="margin-top:0.5rem;">
-                    <span class="legend-chip">
-                        <span class="legend-dot" style="background:{color}"></span>
-                        Faktor dominan: {row['faktor_dominan']}
-                    </span>
-                </div>
-                <div class="kpi-note" style="margin-top:0.5rem;">
-                    Prevalensi stunting: {row['stunting']:.1f}%
-                </div>
-            </div>
-            """,
+            f'<div class="kpi-card">'
+            f'<div class="kpi-label">{row["provinsi"]}</div>'
+            f'<div class="kpi-value" style="font-size:1.3rem;">{search}</div>'
+            f'<div style="margin-top:0.5rem;">'
+            f'<span class="legend-chip">'
+            f'<span class="legend-dot" style="background:{color}"></span>'
+            f'Faktor dominan: {row["faktor_dominan"]}'
+            f'</span>'
+            f'</div>'
+            f'<div class="kpi-note" style="margin-top:0.5rem;">'
+            f'Prevalensi stunting: {row["stunting"]:.1f}%'
+            f'</div>'
+            f'</div>',
             unsafe_allow_html=True,
         )
         st.caption("Lihat detail lengkap di halaman **Profil Kabupaten/Kota**.")
