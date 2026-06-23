@@ -5,6 +5,7 @@ Semua nilai metrik mengikuti hasil analisis pada notebook GRF asli
 """
 
 import json
+import html as _html
 import streamlit as st
 import pandas as pd
 import geopandas as gpd
@@ -116,11 +117,19 @@ def render_kpi_card(label, value, note=None, delta=None, delta_positive=True, ac
         delta_html = f'<div class="{cls}">{delta}</div>'
     note_html = f'<div class="kpi-note">{note}</div>' if note else ""
     accent_cls = f" accent-{accent}" if accent else ""
+    # If value is a JSON-like object, render it as formatted JSON inside a <pre>
+    if isinstance(value, (dict, list)):
+        json_str = json.dumps(value, ensure_ascii=False, indent=2)
+        # Escape to avoid accidental HTML injection from JSON content
+        value_html = f'<pre class="kpi-value" style="white-space:pre-wrap;">{_html.escape(json_str)}</pre>'
+    else:
+        value_html = f"<div class=\"kpi-value\">{value}</div>"
+
     st.markdown(
         f"""
         <div class="kpi-card{accent_cls}">
             <div class="kpi-label">{label}</div>
-            <div class="kpi-value">{value}</div>
+            {value_html}
             {delta_html}
             {note_html}
         </div>
