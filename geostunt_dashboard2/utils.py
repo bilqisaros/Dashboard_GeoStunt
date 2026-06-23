@@ -110,12 +110,19 @@ def render_section_header(eyebrow, title, desc=None):
 
 
 def render_kpi_card(label, value, note=None, delta=None, delta_positive=True, accent=None):
+
+    st.write("DEBUG KPI CARD")
+    st.write("NOTE =", note)
+
     delta_html = ""
     if delta:
         cls = "kpi-delta-up" if delta_positive else "kpi-delta-down"
         delta_html = f'<div class="{cls}">{delta}</div>'
+
     note_html = f'<div class="kpi-note">{note}</div>' if note else ""
+
     accent_cls = f" accent-{accent}" if accent else ""
+
     st.markdown(
         f"""
         <div class="kpi-card{accent_cls}">
