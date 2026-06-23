@@ -234,12 +234,10 @@ st.caption("Buka halaman **Peta Nasional** untuk eksplorasi penuh, termasuk filt
 
 # ---------------------------------------------------------------- FOOTER
 st.markdown(
-    """
-    <div class="geostunt-footer">
-        GeoStunt &mdash; Dashboard Analitik Spasial Stunting Indonesia<br>
-        Disusun untuk kompetisi Satria Data &middot; Metode: Geographical Random Forest (Georganos et al., 2019; Georganos &amp; Kalogirou, 2022; Sun et al., 2024)<br>
-        Sumber data: SSGI 2024, Badan Pusat Statistik, Badan Pangan Nasional
-    </div>
-    """,
+    '<div class="geostunt-footer">'
+    "GeoStunt &mdash; Dashboard Analitik Spasial Stunting Indonesia<br>"
+    "Disusun untuk kompetisi Satria Data &middot; Metode: Geographical Random Forest (Georganos et al., 2019; Georganos &amp; Kalogirou, 2022; Sun et al., 2024)<br>"
+    "Sumber data: SSGI 2024, Badan Pusat Statistik, Badan Pangan Nasional"
+    "</div>",
     unsafe_allow_html=True,
 )
