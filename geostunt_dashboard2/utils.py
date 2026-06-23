@@ -90,17 +90,15 @@ def inject_css():
 
 def render_hero(title, subtitle, badges):
     badge_html = "".join([f'<span class="geostunt-badge">{b}</span>' for b in badges])
-    st.markdown(
-        f"""
-        <div class="geostunt-hero">
-            <div class="geostunt-eyebrow">Dashboard Analitik Kebijakan Stunting</div>
-            <div class="geostunt-title">{title}</div>
-            <div class="geostunt-subtitle">{subtitle}</div>
-            <div class="geostunt-badge-row">{badge_html}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    html = (
+        f'<div class="geostunt-hero">'
+        f'<div class="geostunt-eyebrow">Dashboard Analitik Kebijakan Stunting</div>'
+        f'<div class="geostunt-title">{title}</div>'
+        f'<div class="geostunt-subtitle">{subtitle}</div>'
+        f'<div class="geostunt-badge-row">{badge_html}</div>'
+        f'</div>'
     )
+    st.markdown(html, unsafe_allow_html=True)
 
 
 def render_section_header(eyebrow, title, desc=None):
@@ -117,25 +115,24 @@ def render_kpi_card(label, value, note=None, delta=None, delta_positive=True, ac
         delta_html = f'<div class="{cls}">{delta}</div>'
     note_html = f'<div class="kpi-note">{note}</div>' if note else ""
     accent_cls = f" accent-{accent}" if accent else ""
-    # If value is a JSON-like object, render it as formatted JSON inside a <pre>
     if isinstance(value, (dict, list)):
         json_str = json.dumps(value, ensure_ascii=False, indent=2)
-        # Escape to avoid accidental HTML injection from JSON content
         value_html = f'<pre class="kpi-value" style="white-space:pre-wrap;">{_html.escape(json_str)}</pre>'
     else:
-        value_html = f"<div class=\"kpi-value\">{value}</div>"
+        value_html = f'<div class="kpi-value">{value}</div>'
 
-    st.markdown(
-        f"""
-        <div class="kpi-card{accent_cls}">
-            <div class="kpi-label">{label}</div>
-            {value_html}
-            {delta_html}
-            {note_html}
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    parts = [
+        f'<div class="kpi-card{accent_cls}">',
+        f'<div class="kpi-label">{label}</div>',
+        value_html,
+    ]
+    if delta_html:
+        parts.append(delta_html)
+    if note_html:
+        parts.append(note_html)
+    parts.append('</div>')
+
+    st.markdown('\n'.join(parts), unsafe_allow_html=True)
 
 
 def render_insight(text):
