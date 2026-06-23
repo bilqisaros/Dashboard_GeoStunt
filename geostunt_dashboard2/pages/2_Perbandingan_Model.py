@@ -159,14 +159,12 @@ with col_m2:
         note="GRF berhasil menyerap sebagian besar pola spasial yang tidak tertangkap OLS",
     )
     st.markdown(
-        """
-        <div class="insight-box" style="margin-top:0.8rem;">
-        Moran's I yang lebih rendah pada residual GRF membuktikan bahwa pendekatan
-        lokal (sub-model per wilayah) lebih berhasil menjelaskan keragaman spasial
-        dibanding pendekatan global, walaupun residual belum sepenuhnya bebas
-        dari pola spasial (p masih signifikan).
-        </div>
-        """,
+        '<div class="insight-box" style="margin-top:0.8rem;">'
+        "Moran's I yang lebih rendah pada residual GRF membuktikan bahwa pendekatan "
+        "lokal (sub-model per wilayah) lebih berhasil menjelaskan keragaman spasial "
+        "dibanding pendekatan global, walaupun residual belum sepenuhnya bebas "
+        "dari pola spasial (p masih signifikan)."
+        "</div>",
         unsafe_allow_html=True,
     )
 
