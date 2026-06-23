@@ -68,8 +68,8 @@ render_section_header(
 var_table = """
 | Aspek | Variabel | Satuan | Sumber Data |
 |---|---|---|---|
-| Stunting | Persentase Stunting | Persen (%) | SSGI 2024, Kementerian Kesehatan RI |
-| Kesehatan | Persentase Persalinan Tidak di Fasilitas Kesehatan | Persen (%) | Badan Pusat Statistik (BPS) |
+| Kesehatan | Persentase Stunting | Persen (%) | SSGI 2024, Kementerian Kesehatan RI |
+| Fasilitas Kesehatan | Persentase Persalinan Tidak di Fasilitas Kesehatan | Persen (%) | Badan Pusat Statistik (BPS) |
 | Kesejahteraan | Persentase Penduduk Miskin | Persen (%) | Badan Pusat Statistik (BPS) |
 | Ketahanan Pangan | Konsumsi Protein per Kapita | Gram/Kapita/Hari | Badan Pangan Nasional (BAPANAS) |
 | Ketahanan Pangan | Konsumsi Pangan Hewani | Kg/Kapita/Tahun | Badan Pangan Nasional (BAPANAS) |
