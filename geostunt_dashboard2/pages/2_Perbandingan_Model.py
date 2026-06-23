@@ -18,7 +18,7 @@ render_section_header(
     "Perbandingan Model",
     "Mengapa Geographical Random Forest Dipilih?",
     "Sebelum memilih GRF, dilakukan pengujian bertahap untuk memastikan metode ini "
-    "memang diperlukan -- bukan sekadar tren analisis spasial.",
+    "memang diperlukan, bukan sekadar tren analisis spasial.",
 )
 
 # ------------------------------------------------------------ TAHAP 1: UJI ASUMSI
@@ -66,7 +66,7 @@ render_insight(
     "<strong>Temuan kunci:</strong> Residual model regresi global (OLS) terbukti memiliki "
     "autokorelasi spasial yang signifikan (Moran's I = 0,364; p = 0,001) dan bersifat "
     "heteroskedastis. Ini berarti model global gagal menangkap pola yang bervariasi "
-    "secara spasial -- menjadi dasar kuat untuk beralih ke model yang memperhitungkan "
+    "secara spasial yang menjadi dasar kuat untuk beralih ke model yang memperhitungkan "
     "lokasi geografis seperti GRF."
 )
 
