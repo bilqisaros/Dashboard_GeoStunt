@@ -38,13 +38,11 @@ steps = [
 for col, (num, title, desc, color) in zip(cols, steps):
     with col:
         st.markdown(
-            f"""
-            <div class="step-card" style="border-top:3px solid {color};">
-                <div class="step-number" style="color:{color};">{num}</div>
-                <div class="step-title">{title}</div>
-                <div class="step-desc">{desc}</div>
-            </div>
-            """,
+            f'<div class="step-card" style="border-top:3px solid {color};">'
+            f'<div class="step-number" style="color:{color};">{num}</div>'
+            f'<div class="step-title">{title}</div>'
+            f'<div class="step-desc">{desc}</div>'
+            f'</div>',
             unsafe_allow_html=True,
         )
 
