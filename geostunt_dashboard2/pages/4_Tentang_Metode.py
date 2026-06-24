@@ -23,7 +23,7 @@ Stunting bukan masalah dengan satu sebab tunggal yang sama di seluruh Indonesia.
 Sebuah daerah bisa mengalami stunting tinggi karena kemiskinan, sementara daerah lain
 karena akses pangan hewani yang rendah, atau karena rendahnya tingkat pendidikan ibu.
 Model statistik konvensional biasanya mengasumsikan satu hubungan yang sama berlaku
-di seluruh wilayah tetapi asumsi yang tidak realistis untuk negara seluas dan
+di seluruh wilayah — tetapi asumsi yang tidak realistis untuk negara seluas dan
 sebervariasi Indonesia.
 </div>
 """, unsafe_allow_html=True)
@@ -69,19 +69,20 @@ var_table = """
 | Aspek | Variabel | Satuan | Sumber Data |
 |---|---|---|---|
 | Kesehatan | Persentase Stunting | Persen (%) | SSGI 2024, Kementerian Kesehatan RI |
-| Fasilitas Kesehatan | Persentase Persalinan Tidak di Fasilitas Kesehatan | Persen (%) | Badan Pusat Statistik (BPS) |
+| Fasilitas Kesehatan | Persentase Persalinan Tidak di Fasilitas Kesehatan | Proporsi (0–1) | Badan Pusat Statistik (BPS) |
 | Kesejahteraan | Persentase Penduduk Miskin | Persen (%) | Badan Pusat Statistik (BPS) |
 | Ketahanan Pangan | Konsumsi Protein per Kapita | Gram/Kapita/Hari | Badan Pangan Nasional (BAPANAS) |
-| Ketahanan Pangan | Konsumsi Pangan Hewani | Kg/Kapita/Tahun | Badan Pangan Nasional (BAPANAS) |
+| Ketahanan Pangan | Konsumsi Pangan Hewani | Gram/Kapita/Hari | Badan Pangan Nasional (BAPANAS) |
 | Pendidikan | Rata-rata Lama Sekolah (RLS) | Tahun | Badan Pusat Statistik (BPS) |
 """
 st.markdown(var_table)
 
 st.caption(
-    f"Analisis menggunakan data {len(df)} dari 522 kabupaten/kota di Indonesia "
-    "yang memiliki data lengkap pada keenam variabel di atas. Kabupaten/kota dengan "
-    "data tidak lengkap dikeluarkan dari proses pemodelan, namun tetap ditampilkan "
-    "pada peta dengan keterangan tersendiri."
+    f"Analisis menggunakan data {len(df)} dari 522 kabupaten/kota di Indonesia. "
+    "Data awal mencakup 514 kabupaten/kota; nilai yang hilang pada variabel stunting, "
+    "melahirkan tidak di faskes, konsumsi protein, dan pangan hewani diimputasi "
+    "menggunakan rerata kabupaten/kota lain dalam provinsi yang sama, "
+    "sehingga diperoleh 490 observasi lengkap untuk pemodelan."
 )
 
 st.markdown("---")
@@ -92,17 +93,21 @@ render_section_header("Tahapan Analisis", "Dari data mentah hingga peta faktor d
 st.markdown(
     """
     1. **Pembersihan data** : Menggabungkan enam sumber data resmi pemerintah berdasarkan nama kabupaten/kota,
-       menyamakan format penulisan nama wilayah, dan menghapus baris dengan data tidak lengkap.
+       menyamakan format penulisan nama wilayah (30 nama diharmonisasi ke shapefile), dan mengimputasi
+       nilai yang hilang menggunakan rerata per provinsi — pendekatan yang mempertahankan lebih banyak
+       wilayah dibanding penghapusan baris.
     2. **Pencarian koordinat** : Menghitung titik tengah (centroid) tiap wilayah dari batas administrasi
-       resmi untuk keperluan analisis spasial.
+       resmi (shapefile Batas Kabupaten 2024) untuk keperluan analisis spasial.
     3. **Uji model dasar** : Menjalankan regresi linear (OLS) sebagai pembanding, lalu menguji apakah
-       residualnya menunjukkan pola spasial yang tidak tertangkap.
+       residualnya menunjukkan pola spasial yang tidak tertangkap (Moran's I = 0,3152; p < 0,001).
     4. **Pembanding Random Forest global** : Menjalankan Random Forest tanpa komponen spasial sebagai
-       tahap pembanding kedua.
-    5. **Pemodelan GRF** : Menjalankan Geographical Random Forest dengan parameter bandwidth dan
-       pembobotan yang dioptimalkan secara otomatis, divalidasi dengan 10-fold cross validation.
+       tahap pembanding kedua (10-fold CV).
+    5. **Pemodelan GRF** : Menjalankan Geographical Random Forest dengan parameter bandwidth=90 dan
+       local_weight=0,1901 yang dioptimalkan secara otomatis melalui ISA, divalidasi dengan 10-fold
+       cross validation.
     6. **Ekstraksi faktor dominan** : Mengambil nilai kontribusi (local feature importance) tiap
-       variabel di setiap kabupaten/kota, lalu menentukan faktor dengan kontribusi tertinggi.
+       variabel di setiap kabupaten/kota, merata-ratakannya lintas fold, lalu menentukan faktor
+       dengan kontribusi tertinggi sebagai faktor dominan wilayah tersebut.
     """
 )
 
@@ -129,5 +134,5 @@ render_insight(
     "Penelitian ini menggunakan <strong>Geographical Random Forest (GRF)</strong>, bukan "
     "Geographically Weighted Random Forest (GWRF) yang merupakan pendekatan berbeda. GRF "
     "membangun sub-model Random Forest lokal di tiap titik observasi, diimplementasikan "
-    "melalui package PyGRF."
+    "melalui package <strong>PyGRF</strong> (Sun et al., 2024)."
 )
