@@ -51,7 +51,8 @@ with st.sidebar:
     )
     st.markdown("---")
     st.caption(
-        "Data dianalisis dari 404 kabupaten/kota dengan data SSGI 2024 lengkap, "
+        "Data dianalisis dari 490 kabupaten/kota (dari 514 observasi awal, "
+        "nilai yang hilang diimputasi menggunakan rerata provinsi), "
         "dari total 522 kabupaten/kota di Indonesia."
     )
 
@@ -90,9 +91,9 @@ with col3:
     r2_grf = metrics["model_performance"]["GRF"]["R2"]
     improvement = ((r2_grf - r2_ols) / r2_ols) * 100
     render_kpi_card(
-        "Peningkatan R² (OLS -> GRF)",
+        "Peningkatan R² (OLS → GRF)",
         f"+{improvement:.0f}%",
-        delta=f"{r2_ols:.3f} -> {r2_grf:.3f}",
+        delta=f"{r2_ols:.3f} → {r2_grf:.3f}",
         delta_positive=True,
         note="GRF lebih akurat menjelaskan variasi stunting",
         accent=None,
@@ -105,7 +106,7 @@ with col4:
     render_kpi_card(
         "Faktor Dominan Tersering",
         top_factor,
-        delta=f"{top_count} dari 404 kab/kota ({pct:.0f}%)",
+        delta=f"{top_count} dari {metrics['grf_params']['n_obs']} kab/kota ({pct:.0f}%)",
         delta_positive=True,
         note="Namun bukan dominan di seluruh wilayah",
         accent="gold",
@@ -117,10 +118,10 @@ st.markdown("")
 render_insight(
     "<strong>Temuan utama:</strong> Faktor dominan penyebab stunting berbeda-beda "
     "antar wilayah. RLS (rata-rata lama sekolah) dominan di sebagian besar wilayah Jawa dan "
-    "Sumatra, kemiskinan dominan di wilayah Indonesia timur, sementara konsumsi pangan "
-    "hewani dominan di sebagian Nusa Tenggara dan Sulawesi. Hal ini menunjukkan bahwa "
-    "program intervensi yang seragam secara nasional berisiko tidak optimal karena "
-    "tidak menyasar akar masalah yang sesungguhnya di tiap wilayah."
+    "Sumatra, kemiskinan dan pangan hewani masing-masing mendominasi di 149 kabupaten/kota, "
+    "sementara melahirkan tidak di fasilitas kesehatan muncul lebih menonjol di analisis "
+    "terbaru ini. Hal ini menunjukkan bahwa program intervensi yang seragam secara nasional "
+    "berisiko tidak optimal karena tidak menyasar akar masalah yang sesungguhnya di tiap wilayah."
 )
 
 st.markdown("")
