@@ -33,7 +33,7 @@ asumsi = metrics["uji_asumsi"]
 col1, col2, col3, col4 = st.columns(4)
 with col1:
     render_kpi_card(
-        "Multikolinearitas (VIF)",
+        "Multikolinearitas (VIF max)",
         f"{asumsi['vif_max']:.2f}",
         note=asumsi["vif_keterangan"],
         accent="slate",
@@ -49,7 +49,7 @@ with col3:
     render_kpi_card(
         "Heteroskedastisitas",
         asumsi["heteroskedastisitas"],
-        note=f"Breusch-Pagan p = {asumsi['breusch_pagan_p']:.3f}",
+        note=f"Breusch-Pagan p = {asumsi['breusch_pagan_p']:.4f}",
         delta_positive=False,
         accent="terracotta",
     )
@@ -57,16 +57,17 @@ with col4:
     render_kpi_card(
         "Autokorelasi Spasial",
         asumsi["autokorelasi_spasial"],
-        note=f"Moran's I = {asumsi['moran_ols_I']:.3f}, p = {asumsi['moran_ols_p']:.3f}",
+        note=f"Moran's I = {asumsi['moran_ols_I']:.4f}, p = {asumsi['moran_ols_p']:.3f}",
         delta_positive=False,
         accent="terracotta",
     )
 
 render_insight(
     "<strong>Temuan kunci:</strong> Residual model regresi global (OLS) terbukti memiliki "
-    "autokorelasi spasial yang signifikan (Moran's I = 0,364; p = 0,001) dan bersifat "
+    f"autokorelasi spasial yang signifikan (Moran's I = {asumsi['moran_ols_I']:.4f}; "
+    f"z = {asumsi['moran_ols_z']:.4f}; p = {asumsi['moran_ols_p']:.3f}) dan bersifat "
     "heteroskedastis. Ini berarti model global gagal menangkap pola yang bervariasi "
-    "secara spasial yang menjadi dasar kuat untuk beralih ke model yang memperhitungkan "
+    "secara spasial — menjadi dasar kuat untuk beralih ke model yang memperhitungkan "
     "lokasi geografis seperti GRF."
 )
 
@@ -82,7 +83,10 @@ st.markdown(
 perf = metrics["model_performance"]
 models = list(perf.keys())
 
-fig = make_subplots(rows=1, cols=3, subplot_titles=("R² (lebih tinggi lebih baik)", "MAE (lebih rendah lebih baik)", "RMSE (lebih rendah lebih baik)"))
+fig = make_subplots(
+    rows=1, cols=3,
+    subplot_titles=("R² (lebih tinggi lebih baik)", "MAE (lebih rendah lebih baik)", "RMSE (lebih rendah lebih baik)")
+)
 
 for i, metric_key in enumerate(["R2", "MAE", "RMSE"], start=1):
     values = [perf[m][metric_key] for m in models]
@@ -91,7 +95,7 @@ for i, metric_key in enumerate(["R2", "MAE", "RMSE"], start=1):
         go.Bar(
             x=models, y=values,
             marker=dict(color=colors, line=dict(color="white", width=1.5)),
-            text=[f"{v:.3f}" for v in values], textposition="outside",
+            text=[f"{v:.4f}" for v in values], textposition="outside",
             textfont=dict(size=13, family="Inter, sans-serif"),
             showlegend=False,
         ),
@@ -110,11 +114,18 @@ fig.update_xaxes(showgrid=False, tickfont=dict(size=12, family="Inter, sans-seri
 fig.update_annotations(font=dict(size=13, family="Inter, sans-serif", color="#16302A"))
 st.plotly_chart(fig, use_container_width=True)
 
+r2_ols = perf["OLS"]["R2"]
+r2_grf = perf["GRF"]["R2"]
+improvement_pct = ((r2_grf - r2_ols) / r2_ols) * 100
+
 render_insight(
     "GRF konsisten mengungguli OLS dan Random Forest global pada ketiga metrik evaluasi. "
-    "Peningkatan R² dari 0,146 (OLS) menjadi 0,203 (GRF) menunjukkan model GRF mampu "
-    "menjelaskan variasi stunting antarwilayah secara lebih baik dengan memperhitungkan "
-    "konteks spasial tiap kabupaten/kota."
+    f"Peningkatan R² dari {r2_ols:.4f} (OLS) menjadi {r2_grf:.4f} (GRF) "
+    f"(+{improvement_pct:.0f}%) menunjukkan model GRF mampu menjelaskan variasi "
+    "stunting antarwilayah secara lebih baik dengan memperhitungkan konteks spasial "
+    "tiap kabupaten/kota. <em>Catatan: OLS dievaluasi secara in-sample, sementara "
+    "RF dan GRF dievaluasi dengan 10-fold cross validation (out-of-sample), "
+    "sehingga perbandingan ini perlu diinterpretasikan dengan hati-hati.</em>"
 )
 
 st.markdown("---")
@@ -134,7 +145,7 @@ with col_m1:
         x=["Residual OLS", "Residual GRF"],
         y=[moran_res["OLS"]["I"], moran_res["GRF"]["I"]],
         marker_color=["#9CA39B", "#2D6A4F"],
-        text=[f"{moran_res['OLS']['I']:.3f}", f"{moran_res['GRF']['I']:.3f}"],
+        text=[f"{moran_res['OLS']['I']:.4f}", f"{moran_res['GRF']['I']:.4f}"],
         textposition="outside",
     ))
     fig2.update_layout(
@@ -154,7 +165,7 @@ with col_m2:
     render_kpi_card(
         "Penurunan Autokorelasi Spasial",
         f"{penurunan:.0f}%",
-        delta=f"{moran_res['OLS']['I']:.3f} -> {moran_res['GRF']['I']:.3f}",
+        delta=f"{moran_res['OLS']['I']:.4f} → {moran_res['GRF']['I']:.4f}",
         delta_positive=True,
         note="GRF berhasil menyerap sebagian besar pola spasial yang tidak tertangkap OLS",
     )
@@ -163,7 +174,7 @@ with col_m2:
         "Moran's I yang lebih rendah pada residual GRF membuktikan bahwa pendekatan "
         "lokal (sub-model per wilayah) lebih berhasil menjelaskan keragaman spasial "
         "dibanding pendekatan global, walaupun residual belum sepenuhnya bebas "
-        "dari pola spasial (p masih signifikan)."
+        "dari pola spasial (p masih signifikan di kedua model)."
         "</div>",
         unsafe_allow_html=True,
     )
@@ -180,17 +191,19 @@ render_section_header(
 params = metrics["grf_params"]
 col_p1, col_p2, col_p3, col_p4, col_p5 = st.columns(5)
 with col_p1:
-    render_kpi_card("Bandwidth", str(params["bandwidth"]), note="Jumlah tetangga terdekat", accent="slate")
+    render_kpi_card("Bandwidth", str(params["bandwidth"]), note="Jumlah tetangga terdekat (naik dari 79 → 90)", accent="slate")
 with col_p2:
-    render_kpi_card("Local Weight", f"{params['local_weight']:.3f}", note="Hasil optimasi ISA", accent="gold")
+    render_kpi_card("Local Weight", f"{params['local_weight']:.4f}", note="Hasil optimasi ISA", accent="gold")
 with col_p3:
     render_kpi_card("Jumlah Pohon", str(params["n_estimators"]), note="Per sub-model RF", accent="terracotta")
 with col_p4:
     render_kpi_card("Validasi", f"{params['n_folds']}-Fold", note="Cross validation", accent="plum")
 with col_p5:
-    render_kpi_card("Observasi", str(params["n_obs"]), note="Kabupaten/kota", accent=None)
+    render_kpi_card("Observasi", str(params["n_obs"]), note="Kab/kota (setelah imputasi)", accent=None)
 
 st.caption(
     "Bandwidth dan local weight ditentukan otomatis melalui metode Incremental Spatial "
-    "Autocorrelation (ISA) mengikuti Sun et al. (2024), bukan trial-and-error manual."
+    "Autocorrelation (ISA) mengikuti Sun et al. (2024), bukan trial-and-error manual. "
+    "Peningkatan bandwidth dari 79 (analisis sebelumnya) menjadi 90 disebabkan bertambahnya "
+    "jumlah observasi dari 404 menjadi 490 kabupaten/kota setelah imputasi rerata provinsi."
 )
