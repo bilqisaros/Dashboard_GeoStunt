@@ -1,7 +1,9 @@
 """
 Utilitas pemuatan data dan fungsi bantu untuk dashboard GeoStunt.
-Semua nilai metrik mengikuti hasil analisis pada notebook GRF asli
-(SEC_GWRF.ipynb) -- 10-fold cross validation, bandwidth=79, n=404 kab/kota.
+Semua nilai metrik mengikuti hasil analisis terbaru pada notebook GRF
+(SEC_GWRF_hasil_analisis_terbaru.ipynb) — 10-fold cross validation,
+bandwidth=90, local_weight=0.1901, n=490 kab/kota (setelah imputasi
+rerata provinsi dari 514 observasi awal).
 """
 
 import json
@@ -31,7 +33,7 @@ VAR_LABELS = {
 }
 
 VAR_UNITS = {
-    "melahirkan_tidak_difaskes": "%",
+    "melahirkan_tidak_difaskes": "proporsi (0–1)",
     "kemiskinan": "%",
     "konsumsi_protein_per_kapita": "gram/kapita/hari",
     "pangan_hewani": "gram/kapita/hari",
