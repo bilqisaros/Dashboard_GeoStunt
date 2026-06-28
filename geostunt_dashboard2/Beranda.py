@@ -51,7 +51,7 @@ with st.sidebar:
     )
     st.markdown("---")
     st.caption(
-        "Data dianalisis dari 490 kabupaten/kota (dari 514 observasi awal, "
+        "Data dianalisis dari 489 kabupaten/kota (dari 513 observasi awal, "
         "nilai yang hilang diimputasi menggunakan rerata provinsi), "
         "dari total 522 kabupaten/kota di Indonesia."
     )
@@ -117,11 +117,11 @@ st.markdown("")
 # ---------------------------------------------------------------- INSIGHT UTAMA
 render_insight(
     "<strong>Temuan utama:</strong> Faktor dominan penyebab stunting berbeda-beda "
-    "antar wilayah. RLS (rata-rata lama sekolah) dominan di sebagian besar wilayah Jawa dan "
-    "Sumatra, kemiskinan dan pangan hewani masing-masing mendominasi di 149 kabupaten/kota, "
-    "sementara melahirkan tidak di fasilitas kesehatan muncul lebih menonjol di analisis "
-    "terbaru ini. Hal ini menunjukkan bahwa program intervensi yang seragam secara nasional "
-    "berisiko tidak optimal karena tidak menyasar akar masalah yang sesungguhnya di tiap wilayah."
+    "antar wilayah. RLS (rata-rata lama sekolah) dominan di 175 kabupaten/kota terutama "
+    "di Jawa dan Sumatra, pangan hewani dominan di 161 kabupaten/kota terutama di Nusa Tenggara "
+    "dan Sulawesi, sementara kemiskinan dominan di 126 kabupaten/kota khususnya di Indonesia Timur. "
+    "Hal ini menunjukkan bahwa program intervensi yang seragam secara nasional berisiko tidak "
+    "optimal karena tidak menyasar akar masalah yang sesungguhnya di tiap wilayah."
 )
 
 st.markdown("")
