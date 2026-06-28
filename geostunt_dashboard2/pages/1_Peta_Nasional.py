@@ -24,7 +24,7 @@ render_section_header(
 )
 
 gdf = load_geo_data()
-df = load_master_data()
+df  = load_master_data()
 
 # ------------------------------------------------------------ KONTROL
 col_ctrl1, col_ctrl2 = st.columns([1, 2])
@@ -52,10 +52,7 @@ if peta_pilihan == "Faktor Dominan":
         hover_data={"provinsi": True, "stunting": ":.1f"},
         category_orders={"faktor_dominan": list(color_map.keys())},
     )
-    fig.update_geos(
-        fitbounds="locations", visible=False,
-        bgcolor="rgba(0,0,0,0)",
-    )
+    fig.update_geos(fitbounds="locations", visible=False, bgcolor="rgba(0,0,0,0)")
     fig.update_layout(
         height=560,
         margin=dict(l=0, r=0, t=10, b=0),
@@ -77,27 +74,66 @@ if peta_pilihan == "Faktor Dominan":
 # ------------------------------------------------------------ PETA: STUNTING
 elif peta_pilihan == "Prevalensi Stunting":
 
+    # Pisahkan wilayah yang punya data dan tidak
+    gdf_ada  = gdf[gdf["stunting"].notna()].copy()
+    gdf_null = gdf[gdf["stunting"].isna()].copy()
+
+    geojson_ada  = json.loads(gdf_ada.to_json())
+    geojson_null = json.loads(gdf_null.to_json())
+
+    stunting_min = df["stunting"].min()
+    stunting_max = df["stunting"].max()
+
+    # Layer 1 — wilayah tanpa data (abu-abu)
     fig = px.choropleth(
-        gdf,
-        geojson=geojson_dict,
-        locations=gdf.index,
+        gdf_null,
+        geojson=geojson_null,
+        locations=gdf_null.index,
+        color_discrete_sequence=["#D4D2C8"],
+        hover_name="kab_kota",
+        hover_data={"provinsi": True},
+    )
+    fig.update_traces(
+        marker_line_width=0.3,
+        marker_line_color="white",
+        showlegend=True,
+        name="Tidak ada data",
+        hovertemplate="<b>%{hovertext}</b><extra>Tidak ada data</extra>",
+    )
+
+    # Layer 2 — wilayah dengan data (gradasi warna stunting)
+    fig2 = px.choropleth(
+        gdf_ada,
+        geojson=geojson_ada,
+        locations=gdf_ada.index,
         color="stunting",
         color_continuous_scale=[
             [0, "#F4F1E8"], [0.3, "#E9C46A"], [0.6, "#E76F51"], [1, "#9D2B1F"]
         ],
         hover_name="kab_kota",
         hover_data={"provinsi": True, "stunting": ":.1f"},
-        range_color=(df["stunting"].min(), df["stunting"].max()),
+        range_color=(stunting_min, stunting_max),
     )
+    fig2.update_traces(marker_line_width=0.3, marker_line_color="white")
+
+    # Gabungkan kedua layer
+    for trace in fig2.data:
+        fig.add_trace(trace)
+
+    # Salin coloraxis dari fig2 ke fig
+    fig.update_layout(
+        coloraxis=fig2.layout.coloraxis,
+        coloraxis_colorbar=dict(title="Stunting (%)"),
+    )
+
     fig.update_geos(fitbounds="locations", visible=False, bgcolor="rgba(0,0,0,0)")
     fig.update_layout(
         height=560,
         margin=dict(l=0, r=0, t=10, b=0),
-        coloraxis_colorbar=dict(title="Stunting (%)"),
         font=dict(family="Inter, sans-serif", size=12, color="#1B3A2B"),
         paper_bgcolor="rgba(0,0,0,0)",
+        legend=dict(title="Keterangan", orientation="v"),
     )
-    fig.update_traces(marker_line_width=0.3, marker_line_color="white")
     st.plotly_chart(fig, use_container_width=True)
 
     target_nasional = 14
@@ -115,15 +151,38 @@ else:
         VAR_COLS,
         format_func=lambda x: VAR_LABELS[x],
     )
-    var_label = VAR_LABELS[var_pilihan]
-
-    # Kolom local importance disimpan dengan nama label (lihat dominan_df.csv)
+    var_label    = VAR_LABELS[var_pilihan]
     col_importance = var_label
 
+    # Pisahkan wilayah yang punya data dan tidak
+    gdf_ada  = gdf[gdf[col_importance].notna()].copy()
+    gdf_null = gdf[gdf[col_importance].isna()].copy()
+
+    geojson_ada  = json.loads(gdf_ada.to_json())
+    geojson_null = json.loads(gdf_null.to_json())
+
+    # Layer 1 — abu-abu (tidak ada data)
     fig = px.choropleth(
-        gdf,
-        geojson=geojson_dict,
-        locations=gdf.index,
+        gdf_null,
+        geojson=geojson_null,
+        locations=gdf_null.index,
+        color_discrete_sequence=["#D4D2C8"],
+        hover_name="kab_kota",
+        hover_data={"provinsi": True},
+    )
+    fig.update_traces(
+        marker_line_width=0.3,
+        marker_line_color="white",
+        showlegend=True,
+        name="Tidak ada data",
+        hovertemplate="<b>%{hovertext}</b><extra>Tidak ada data</extra>",
+    )
+
+    # Layer 2 — gradasi hijau (ada data)
+    fig2 = px.choropleth(
+        gdf_ada,
+        geojson=geojson_ada,
+        locations=gdf_ada.index,
         color=col_importance,
         color_continuous_scale=[
             [0, "#F4F1E8"], [0.5, "#74A892"], [1, "#1B3A2B"]
@@ -131,15 +190,21 @@ else:
         hover_name="kab_kota",
         hover_data={"provinsi": True},
     )
+    fig2.update_traces(marker_line_width=0.3, marker_line_color="white")
+
+    for trace in fig2.data:
+        fig.add_trace(trace)
+
+    fig.update_layout(coloraxis=fig2.layout.coloraxis,
+                      coloraxis_colorbar=dict(title="Local Importance"))
+
     fig.update_geos(fitbounds="locations", visible=False, bgcolor="rgba(0,0,0,0)")
     fig.update_layout(
         height=560,
         margin=dict(l=0, r=0, t=10, b=0),
-        coloraxis_colorbar=dict(title="Local Importance"),
         font=dict(family="Inter, sans-serif", size=12, color="#1B3A2B"),
         paper_bgcolor="rgba(0,0,0,0)",
     )
-    fig.update_traces(marker_line_width=0.3, marker_line_color="white")
     st.plotly_chart(fig, use_container_width=True)
 
     render_insight(
