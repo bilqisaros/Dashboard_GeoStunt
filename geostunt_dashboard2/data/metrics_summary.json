@@ -1,62 +1,62 @@
 {
   "uji_asumsi": {
-    "vif_max": 1.82,
+    "vif_max": 1.823,
     "vif_keterangan": "Tidak ada multikolinearitas",
-    "shapiro_p": 0.119,
+    "shapiro_p": 0.1589,
     "normalitas": "Normal",
     "breusch_pagan_p": 0.0375,
     "heteroskedastisitas": "Heteroskedastis",
-    "moran_ols_I": 0.3152,
+    "moran_ols_I": 0.323,
     "moran_ols_p": 0.001,
-    "moran_ols_z": 12.0367,
+    "moran_ols_z": 12.405,
     "autokorelasi_spasial": "Ada (signifikan)"
   },
   "model_performance": {
     "OLS": {
-      "R2": 0.1154,
-      "MAE": 4.498,
-      "RMSE": 5.755
+      "R2": 0.1163,
+      "MAE": 4.4705,
+      "RMSE": 5.7128
     },
     "Random Forest": {
-      "R2": 0.1553,
-      "MAE": 4.4752,
-      "RMSE": 5.6238
+      "R2": 0.1471,
+      "MAE": 4.4731,
+      "RMSE": 5.6123
     },
     "GRF": {
-      "R2": 0.1882,
-      "MAE": 4.3782,
-      "RMSE": 5.513
+      "R2": 0.1867,
+      "MAE": 4.363,
+      "RMSE": 5.4805
     }
   },
   "moran_residual": {
     "OLS": {
-      "I": 0.3152,
+      "I": 0.323,
       "p": 0.001
     },
     "GRF": {
-      "I": 0.1839,
+      "I": 0.1863,
       "p": 0.001
     }
   },
   "grf_params": {
-    "bandwidth": 90,
-    "local_weight": 0.1901,
+    "bandwidth": 81,
+    "local_weight": 0.1985,
     "n_estimators": 500,
     "n_folds": 10,
-    "n_obs": 490
+    "n_obs": 489
   },
   "feature_importance_global_rf": {
-    "Kemiskinan": 0.23418,
-    "Pangan Hewani": 0.217286,
-    "RLS": 0.195654,
-    "Konsumsi Protein": 0.183042,
-    "Melahirkan Tidak di Faskes": 0.169838
+    "Kemiskinan": 0.234739,
+    "Pangan Hewani": 0.219767,
+    "RLS": 0.195487,
+    "Konsumsi Protein": 0.18085,
+    "Melahirkan Tidak di Faskes": 0.169158
   },
   "faktor_dominan_distribusi": {
-    "RLS": 165,
-    "Kemiskinan": 149,
-    "Pangan Hewani": 149,
-    "Melahirkan Tidak di Faskes": 16,
-    "Konsumsi Protein": 10
+    "RLS": 175,
+    "Pangan Hewani": 161,
+    "Kemiskinan": 126,
+    "Melahirkan Tidak di Faskes": 19,
+    "Konsumsi Protein": 8
   }
 }
