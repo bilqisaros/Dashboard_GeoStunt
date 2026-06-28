@@ -79,10 +79,10 @@ st.markdown(var_table)
 
 st.caption(
     f"Analisis menggunakan data {len(df)} dari 522 kabupaten/kota di Indonesia. "
-    "Data awal mencakup 514 kabupaten/kota; nilai yang hilang pada variabel stunting, "
+    "Data awal mencakup 513 kabupaten/kota; nilai yang hilang pada variabel stunting, "
     "melahirkan tidak di faskes, konsumsi protein, dan pangan hewani diimputasi "
     "menggunakan rerata kabupaten/kota lain dalam provinsi yang sama, "
-    "sehingga diperoleh 490 observasi lengkap untuk pemodelan."
+    "sehingga diperoleh 489 observasi lengkap untuk pemodelan."
 )
 
 st.markdown("---")
@@ -102,8 +102,8 @@ st.markdown(
        residualnya menunjukkan pola spasial yang tidak tertangkap (Moran's I = 0,3152; p < 0,001).
     4. **Pembanding Random Forest global** : Menjalankan Random Forest tanpa komponen spasial sebagai
        tahap pembanding kedua (10-fold CV).
-    5. **Pemodelan GRF** : Menjalankan Geographical Random Forest dengan parameter bandwidth=90 dan
-       local_weight=0,1901 yang dioptimalkan secara otomatis melalui ISA, divalidasi dengan 10-fold
+    5. **Pemodelan GRF** : Menjalankan Geographical Random Forest dengan parameter bandwidth=81 dan
+       local_weight=0,1985 yang dioptimalkan secara otomatis melalui ISA, divalidasi dengan 10-fold
        cross validation.
     6. **Ekstraksi faktor dominan** : Mengambil nilai kontribusi (local feature importance) tiap
        variabel di setiap kabupaten/kota, merata-ratakannya lintas fold, lalu menentukan faktor
