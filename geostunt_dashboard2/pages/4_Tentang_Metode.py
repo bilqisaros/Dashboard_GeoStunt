@@ -119,7 +119,7 @@ render_section_header("Referensi Metodologi", "Dasar ilmiah yang digunakan", Non
 st.markdown(
     """
     - Georganos, S., Grippa, T., Gadiaga, A. N., Linard, C., Lennert, M., Vanhuysse, S., Mboga, N.,
-      Wolff, E., & Kalogirou, S. (2019). Geographical random forests: a spatial extension of the
+      Wolff, E., & Kalogirou, S. (2021). Geographical random forests: a spatial extension of the
       random forest algorithm to address spatial heterogeneity in remote sensing and population
       modelling. *Geocarto International*, 36(2), 121-136.
     - Georganos, S., & Kalogirou, S. (2022). A Forest of Forests: A Spatially Weighted and
@@ -131,8 +131,8 @@ st.markdown(
 )
 
 render_insight(
-    "Penelitian ini menggunakan <strong>Geographical Random Forest (GRF)</strong>, bukan "
-    "Geographically Weighted Random Forest (GWRF) yang merupakan pendekatan berbeda. GRF "
-    "membangun sub-model Random Forest lokal di tiap titik observasi, diimplementasikan "
+    "Penelitian ini menggunakan <strong>Geographical Random Forest (GRF)</strong>. "
+    "GRF membangun sub-model Random Forest lokal"
+    "di tiap titik observasi, diimplementasikan "
     "melalui package <strong>PyGRF</strong> (Sun et al., 2024)."
 )
