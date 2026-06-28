@@ -191,7 +191,7 @@ render_section_header(
 params = metrics["grf_params"]
 col_p1, col_p2, col_p3, col_p4, col_p5 = st.columns(5)
 with col_p1:
-    render_kpi_card("Bandwidth", str(params["bandwidth"]), note="Jumlah tetangga terdekat (naik dari 79 → 90)", accent="slate")
+    render_kpi_card("Bandwidth", str(params["bandwidth"]), note="Jumlah tetangga terdekat (hasil optimasi ISA)", accent="slate")
 with col_p2:
     render_kpi_card("Local Weight", f"{params['local_weight']:.4f}", note="Hasil optimasi ISA", accent="gold")
 with col_p3:
@@ -204,6 +204,6 @@ with col_p5:
 st.caption(
     "Bandwidth dan local weight ditentukan otomatis melalui metode Incremental Spatial "
     "Autocorrelation (ISA) mengikuti Sun et al. (2024), bukan trial-and-error manual. "
-    "Peningkatan bandwidth dari 79 (analisis sebelumnya) menjadi 90 disebabkan bertambahnya "
-    "jumlah observasi dari 404 menjadi 490 kabupaten/kota setelah imputasi rerata provinsi."
+    "Bandwidth = 81 dan local weight = 0,1985 merupakan parameter optimal yang dihasilkan "
+    "dari 489 kabupaten/kota setelah imputasi rerata provinsi."
 )
