@@ -3,7 +3,8 @@ import plotly.graph_objects as go
 
 from utils import (
     inject_css, render_section_header, render_insight, render_kpi_card,
-    load_master_data, VAR_COLS, VAR_LABELS, VAR_UNITS, FACTOR_COLORS,
+    load_master_data, load_local_importance,
+    VAR_COLS, VAR_LABELS, VAR_UNITS, FACTOR_COLORS,
 )
 
 st.set_page_config(
@@ -12,6 +13,7 @@ st.set_page_config(
 inject_css()
 
 df = load_master_data()
+df_local = load_local_importance()
 
 render_section_header(
     "Profil Kabupaten/Kota",
@@ -46,6 +48,7 @@ if not kab_pilihan:
     st.stop()
 
 row = df[df["kab_kota"] == kab_pilihan].iloc[0]
+row_local = df_local[df_local["kab_kota"] == kab_pilihan].iloc[0]
 color = FACTOR_COLORS.get(row["faktor_dominan"], "#999")
 
 st.markdown("---")
