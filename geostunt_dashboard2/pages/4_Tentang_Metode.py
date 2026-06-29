@@ -48,14 +48,6 @@ for col, (num, title, desc, color) in zip(cols, steps):
 
 st.markdown("")
 
-render_insight(
-    "<strong>Analogi sederhana:</strong> Bayangkan model regresi biasa seperti dokter "
-    "umum yang memberi resep yang sama untuk semua pasien demam. GRF lebih seperti "
-    "tim dokter yang masing-masing memeriksa pasien di kecamatannya sendiri, sehingga "
-    "diagnosisnya lebih sesuai dengan kondisi lokal, meski tetap mengacu pada ilmu "
-    "kedokteran yang sama."
-)
-
 st.markdown("---")
 
 # ------------------------------------------------------------ VARIABEL
