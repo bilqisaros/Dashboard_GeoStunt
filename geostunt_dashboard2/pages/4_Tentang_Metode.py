@@ -23,7 +23,7 @@ Stunting bukan masalah dengan satu sebab tunggal yang sama di seluruh Indonesia.
 Sebuah daerah bisa mengalami stunting tinggi karena kemiskinan, sementara daerah lain
 karena akses pangan hewani yang rendah, atau karena rendahnya tingkat pendidikan ibu.
 Model statistik konvensional biasanya mengasumsikan satu hubungan yang sama berlaku
-di seluruh wilayah — tetapi asumsi yang tidak realistis untuk negara seluas dan
+di seluruh wilayah, tetapi asumsi yang tidak realistis untuk negara seluas dan
 sebervariasi Indonesia.
 </div>
 """, unsafe_allow_html=True)
