@@ -19,7 +19,7 @@ render_section_header(
     "Peta Nasional",
     "Sebaran Stunting dan Faktor Dominan per Kabupaten/Kota",
     "Peta mencakup seluruh 522 kabupaten/kota di Indonesia. Wilayah berwarna abu-abu "
-    "menandakan data SSGI 2024 untuk wilayah tersebut tidak tersedia atau tidak lengkap "
+    "menandakan data untuk wilayah tersebut tidak tersedia atau tidak lengkap "
     "sehingga tidak diikutkan dalam analisis GRF.",
 )
 
