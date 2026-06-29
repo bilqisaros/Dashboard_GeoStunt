@@ -67,7 +67,7 @@ render_insight(
     f"autokorelasi spasial yang signifikan (Moran's I = {asumsi['moran_ols_I']:.4f}; "
     f"z = {asumsi['moran_ols_z']:.4f}; p = {asumsi['moran_ols_p']:.3f}) dan bersifat "
     "heteroskedastis. Ini berarti model global gagal menangkap pola yang bervariasi "
-    "secara spasial — menjadi dasar kuat untuk beralih ke model yang memperhitungkan "
+    "secara spasial, menjadi dasar kuat untuk beralih ke model yang memperhitungkan "
     "lokasi geografis seperti GRF."
 )
 
