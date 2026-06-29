@@ -200,7 +200,7 @@ render_section_header(
     "Pratinjau Peta Nasional",
     "Faktor dominan stunting di seluruh Indonesia",
     "Setiap warna mewakili faktor yang paling berkontribusi terhadap stunting di "
-    "kabupaten/kota tersebut. Wilayah abu-abu menandakan data SSGI 2024 tidak tersedia.",
+    "kabupaten/kota tersebut. Wilayah abu-abu menandakan data tidak tersedia.",
 )
 
 import json
