@@ -124,8 +124,7 @@ render_insight(
     f"(+{improvement_pct:.0f}%) menunjukkan model GRF mampu menjelaskan variasi "
     "stunting antarwilayah secara lebih baik dengan memperhitungkan konteks spasial "
     "tiap kabupaten/kota. <em>Catatan: OLS dievaluasi secara in-sample, sementara "
-    "RF dan GRF dievaluasi dengan 10-fold cross validation (out-of-sample), "
-    "sehingga perbandingan ini perlu diinterpretasikan dengan hati-hati.</em>"
+    "RF dan GRF dievaluasi dengan 10-fold cross validation (out-of-sample) "</em>"
 )
 
 st.markdown("---")
