@@ -49,7 +49,7 @@ if not kab_pilihan:
 
 row = df[df["kab_kota"] == kab_pilihan].iloc[0]
 row_local = df_local[df_local["kab_kota"] == kab_pilihan].iloc[0]
-color = FACTOR_COLORS.get(row["faktor_dominan"], "#999")
+color = FACTOR_COLORS.get(row_local["faktor_dominan"], "#999")
 
 st.markdown("---")
 
@@ -63,7 +63,7 @@ with col_h1:
         f'<div style="margin-top:0.7rem;">'
         f'<span class="legend-chip" style="font-size:0.85rem;">'
         f'<span class="legend-dot" style="background:{color}"></span>'
-        f'Faktor dominan: {row["faktor_dominan"]}'
+        f'Faktor dominan: {row_local["faktor_dominan"]}'
         f'</span>'
         f'</div>'
         f'</div>',
@@ -112,16 +112,26 @@ st.markdown("")
 # ------------------------------------------------------------ LOCAL IMPORTANCE CHART
 render_section_header(
     "Kontribusi Tiap Faktor (Local Feature Importance)",
-    f"Mengapa {row['faktor_dominan']} menjadi faktor dominan di {kab_pilihan}?",
+    f"Mengapa {row_local['faktor_dominan']} menjadi faktor dominan di {kab_pilihan}?",
     "Nilai ini menunjukkan seberapa besar peran tiap variabel dalam memprediksi "
     "stunting di wilayah ini menurut model GRF, bukan arah hubungan (naik/turun).",
 )
 
-importance_vals = {VAR_LABELS[v]: row_local[v] for v in VAR_COLS}
-sorted_items = sorted(importance_vals.items(), key=lambda x: x[1])
+# Ambil nilai Local Feature Importance dari dominan_df.csv
+importance_vals = {
+    label: row_local[label]
+    for label in VAR_LABELS.values()
+}
+sorted_items = sorted(
+    importance_vals.items(),
+    key=lambda x: x[1]
+)
 labels_sorted = [i[0] for i in sorted_items]
 values_sorted = [i[1] for i in sorted_items]
-colors_sorted = [FACTOR_COLORS.get(l, "#999") for l in labels_sorted]
+colors_sorted = [
+    FACTOR_COLORS.get(label, "#999")
+    for label in labels_sorted
+]
 
 fig = go.Figure(go.Bar(
     x=values_sorted, y=labels_sorted, orientation="h",
