@@ -142,7 +142,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 render_insight(
     f"<strong>Rekomendasi arah intervensi:</strong> Karena faktor dominan di {kab_pilihan} "
-    f"adalah <strong>{row['faktor_dominan']}</strong>, program intervensi yang menyasar "
+    f"adalah <strong>{row_local['faktor_dominan']}</strong>, program intervensi yang menyasar "
     "faktor ini berpotensi memberikan dampak lebih besar dibanding program yang seragam "
     "secara nasional. Nilai variabel lain tetap relevan sebagai faktor pendukung."
 )
