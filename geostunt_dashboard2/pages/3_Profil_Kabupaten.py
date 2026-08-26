@@ -117,7 +117,7 @@ render_section_header(
     "stunting di wilayah ini menurut model GRF, bukan arah hubungan (naik/turun).",
 )
 
-importance_vals = {VAR_LABELS[v]: row[v] for v in VAR_COLS}
+importance_vals = {VAR_LABELS[v]: row_local[v] for v in VAR_COLS}
 sorted_items = sorted(importance_vals.items(), key=lambda x: x[1])
 labels_sorted = [i[0] for i in sorted_items]
 values_sorted = [i[1] for i in sorted_items]
