@@ -12,8 +12,14 @@ st.set_page_config(
 )
 inject_css()
 
-df = load_master_data()
-df_local = load_local_importance()
+row = df[
+    df["kab_kota"] == kab_pilihan
+].iloc[0]
+
+row_local = df_local[
+    (df_local["provinsi"] == row["provinsi"]) &
+    (df_local["kab_kota"] == kab_pilihan)
+].iloc[0]
 
 render_section_header(
     "Profil Kabupaten/Kota",
