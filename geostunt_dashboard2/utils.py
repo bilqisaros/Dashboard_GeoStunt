@@ -17,11 +17,11 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
 VAR_COLS = [
-    "melahirkan_tidak_difaskes",
-    "kemiskinan",
-    "konsumsi_protein_per_kapita",
-    "pangan_hewani",
-    "rls",
+    "Melahirkan Tidak di Faskes",
+    "Kemiskinan",
+    "Konsumsi Protein",
+    "Pangan Hewani",
+    "RLS",
 ]
 
 VAR_LABELS = {
