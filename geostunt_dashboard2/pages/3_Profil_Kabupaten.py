@@ -252,7 +252,7 @@ st.markdown("")
 
 render_section_header(
     "Kontribusi Tiap Faktor (Local Feature Importance)",
-    f"Faktor dominan di {kab_pilihan}",
+    f"Faktor Dominan di {kab_pilihan}",
     "Nilai ini menunjukkan seberapa besar peran tiap variabel "
     "dalam memprediksi stunting di wilayah ini menurut model GRF, "
     "bukan arah hubungan (naik/turun).",
