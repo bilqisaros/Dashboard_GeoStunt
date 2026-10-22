@@ -172,11 +172,12 @@ with col_h1:
     )
 
 with col_h2:
-    # Rata-rata prevalensi stunting provinsi dan nasional
+    # Rata-rata prevalensi stunting provinsi
+    # Acuan nasional berdasarkan SSGI 2024
     provinsi_avg = prov_df_selected["stunting"].mean()
-    nasional_avg = df["stunting"].mean()
+    nasional_avg = 19.8
 
-    # Selisih wilayah terpilih terhadap rata-rata nasional
+    # Selisih wilayah terpilih terhadap acuan nasional SSGI 2024
     selisih = row["stunting"] - nasional_avg
 
     delta_txt = (
@@ -192,7 +193,7 @@ with col_h2:
         delta_positive=(selisih < 0),
         note=(
             f"Rata-rata provinsi: {provinsi_avg:.1f}%"
-            f"<br>Rata-rata nasional: {nasional_avg:.1f}%"
+            f"<br>Rata-rata nasional (SSGI 2024): {nasional_avg:.1f}%"
         ),
         accent="terracotta",
     )
