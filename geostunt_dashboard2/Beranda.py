@@ -67,11 +67,11 @@ col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     render_kpi_card(
-        "Rata-Rata Stunting Nasional",
-        f"{format_number(df['stunting'].mean())}%",
+        "Prevalensi Stunting Nasional",
+        "19,8%",
         delta=f"Rentang {format_number(df['stunting'].min())}% – {format_number(df['stunting'].max())}%",
         delta_positive=True,
-        note="Variasi prevalensi antar kabupaten/kota",
+        note="Acuan nasional berdasarkan SSGI 2024",
         accent="terracotta",
     )
 
